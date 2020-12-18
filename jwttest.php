@@ -1,4 +1,6 @@
 <?php
+require_once "vendor/autoload.php";
+
 use \Firebase\JWT\JWT;
 
 $key = "example_key";
