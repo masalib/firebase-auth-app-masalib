@@ -15,6 +15,14 @@ if (!isset($headers["Authorization"])) {
     var_dump($AuthorizationData);
     $Authorization_array = explode("\n", $AuthorizationData);
     var_dump($Authorization_array);
+
+    $Authorization_array = explode("\t", $AuthorizationData);
+    var_dump($Authorization_array);
+
+    $Authorization_array = explode(" ", $AuthorizationData);
+    var_dump($Authorization_array);
+
+
     $jwt = $Authorization_array[1];
     var_dump($jwt);
 }
