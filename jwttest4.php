@@ -5,13 +5,17 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 
 use \Firebase\JWT\JWT;
-
 $headers = apache_request_headers();
-var_dump($headers);
-exit();
-
-
-
+if (!isset($headers["Authorization"]) {
+    //throw new UnexpectedValueException('"kid" invalid, unable to lookup correct key:'. $header->kid);
+    echo 'error';//401 error‚ª‚¢‚¢‚©‚à
+	exit();
+} else {
+    $AuthorizationData = $headers["Authorization"];
+    $Authorization_array = explode("\n", $AuthorizationData);
+    $jwt = $Authorization_array[1];
+    var_dump($jwt);
+}
 
 $keys_file = "securetoken.json"; // the file for the downloaded public keys
 $cache_file = "pkeys.cache"; // this file contains the next time the system has to revalidate the keys
@@ -61,7 +65,8 @@ function verify_firebase_token($token = '')
                     $return['email'] = $decoded->email;
                     $return['email_verified'] = $decoded->email_verified;
                     $return['name'] = $decoded->name;
-                    $return['picture'] = $decoded->photo;
+                    $return['photo'] = $decoded->photo;
+                    $return['picture'] = $decoded->picture;
 					//var_dump($decoded);
                 } else {
                     if (!empty($_GET['debug'])) {
