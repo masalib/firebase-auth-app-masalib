@@ -13,7 +13,7 @@ if (!isset($headers["Authorization"])) {
 } else {
     $AuthorizationData = $headers["Authorization"];
     var_dump($AuthorizationData);
-    $Authorization_array = explode("\t", $AuthorizationData);
+    $Authorization_array = explode(" ", $AuthorizationData);
     var_dump($Authorization_array);
     $jwt = $Authorization_array[1];
     var_dump($jwt);
