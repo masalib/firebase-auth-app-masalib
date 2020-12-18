@@ -8,8 +8,8 @@ use \Firebase\JWT\JWT;
 $headers = apache_request_headers();
 if (!isset($headers["Authorization"])) {
     //throw new UnexpectedValueException('"kid" invalid, unable to lookup correct key:'. $header->kid);
-    header( '401 Not Authorized' );
-    exit( 'Not authorized' );
+    http_response_code( 401 ) ;
+    exit();
 } else {
     $AuthorizationData = $headers["Authorization"];
     $Authorization_array = explode(" ", $AuthorizationData);
@@ -26,8 +26,8 @@ $verified_array = verify_firebase_token($jwt);
 //var_dump($verified_array);
 
 if (isset($verified_array["error"])) {
-    header( '401 Not Authorized' );
-    exit( 'Not authorized' );
+    http_response_code( 401 ) ;
+    exit();
 }
 
 echo "success";
