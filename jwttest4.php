@@ -6,7 +6,7 @@ header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 use \Firebase\JWT\JWT;
 $headers = apache_request_headers();
-if (!isset($headers["Authorization"]) {
+if (!isset($headers["Authorization"])) {
     //throw new UnexpectedValueException('"kid" invalid, unable to lookup correct key:'. $header->kid);
     echo 'error';//401 error‚ª‚¢‚¢‚©‚à
 	exit();
