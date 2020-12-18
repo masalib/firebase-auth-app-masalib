@@ -8,15 +8,12 @@ use \Firebase\JWT\JWT;
 $headers = apache_request_headers();
 if (!isset($headers["Authorization"])) {
     //throw new UnexpectedValueException('"kid" invalid, unable to lookup correct key:'. $header->kid);
-    echo 'error';//401 error‚ª‚¢‚¢‚©‚à
-	exit();
+    header( '401 Not Authorized' );
+    exit( 'Not authorized' );
 } else {
     $AuthorizationData = $headers["Authorization"];
-    var_dump($AuthorizationData);
     $Authorization_array = explode(" ", $AuthorizationData);
-    var_dump($Authorization_array);
     $jwt = $Authorization_array[1];
-    var_dump($jwt);
 }
 
 $keys_file = "securetoken.json"; // the file for the downloaded public keys
@@ -26,7 +23,14 @@ $fbProjectId = "learn-firebase-masalib";
 
 $verified_array = verify_firebase_token($jwt);
 
-var_dump($verified_array);
+//var_dump($verified_array);
+
+if (!isset($verified_array["error"])) {
+    header( '401 Not Authorized' );
+    exit( 'Not authorized' );
+}
+
+echo "success";
 
 
 
