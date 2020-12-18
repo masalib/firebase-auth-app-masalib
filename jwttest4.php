@@ -25,7 +25,7 @@ $verified_array = verify_firebase_token($jwt);
 
 //var_dump($verified_array);
 
-if (!isset($verified_array["error"])) {
+if (isset($verified_array["error"])) {
     header( '401 Not Authorized' );
     exit( 'Not authorized' );
 }
