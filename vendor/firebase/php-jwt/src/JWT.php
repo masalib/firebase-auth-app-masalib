@@ -109,7 +109,7 @@ class JWT
         if (\is_array($key) || $key instanceof \ArrayAccess) {
             if (isset($header->kid)) {
                 if (!isset($key[$header->kid])) {
-                    throw new UnexpectedValueException('"kid" invalid, unable to lookup correct key');
+                    throw new UnexpectedValueException('"kid" invalid, unable to lookup correct key:'. $header->kid);
                 }
                 $key = $key[$header->kid];
             } else {
