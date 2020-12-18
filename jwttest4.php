@@ -6,7 +6,7 @@ header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 use \Firebase\JWT\JWT;
 
-$headers = apache_request_headers()
+$headers = apache_request_headers();
 var_dump($headers);
 exit();
 
