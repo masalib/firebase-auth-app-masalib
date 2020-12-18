@@ -56,6 +56,7 @@ function verify_firebase_token($token = '')
                     $return['email_verified'] = $decoded->email_verified;
                     $return['name'] = $decoded->name;
                     $return['picture'] = $decoded->photo;
+					var_dump($decoded);
                 } else {
                     if (!empty($_GET['debug'])) {
                         echo "NOT ALL THE THINGS WERE TRUE!<br>";
