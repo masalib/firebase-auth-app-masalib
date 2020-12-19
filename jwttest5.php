@@ -30,27 +30,13 @@ if (isset($verified_array["error"])) {
     exit();
 }
 
-// 連想配列($array)
-$array = array(
-	"name" => "あらゆ" ,
-	"gender" => "男" ,
-	"blog" => array(
-		"name" => "SYNCER" ,
-		"published" => "2014-06-10" ,
-		"url" => "https://syncer.jp/" ,
-	),
+$json = array(
+    array('name'=>'Google', 'url'=>'https://www.google.co.jp/'),
+    array('name'=>'Yahoo!', 'url'=>'http://www.yahoo.co.jp/'),
 );
-
-// 連想配列($array)をJSONに変換(エンコード)する
-$json = json_encode( $array ) ;
-
-// ヘッダーを指定
-header( "Content-Type: application/json; charset=utf-8" ) ;
-
-var_dump($json);
-
-// JSONを出力
-echo $json ;
+ 
+header("Content-Type: text/javascript; charset=utf-8");
+echo json_encode($json); // 配列をJSON形式に変換してくれる
 
 exit();
 
