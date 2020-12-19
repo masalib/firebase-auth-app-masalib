@@ -3,7 +3,7 @@ require_once "vendor/autoload.php";
 use \Firebase\JWT\JWT;
 
 
-//CORS‚Ìİ’è 
+//CORSã®è¨­å®š 
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept');
 
@@ -26,7 +26,7 @@ if($_SERVER["REQUEST_METHOD"] == "OPTIONS"){
 	exit();
 }
 
-//Authorization‚ÌBearer Token‚©‚çjwt‚ğæ“¾
+//Authorizationã®Bearer Tokenã‹ã‚‰jwtã‚’å–å¾—
 $headers = apache_request_headers();
 if (!isset($headers["Authorization"])) {
     //throw new UnexpectedValueException('"kid" invalid, unable to lookup correct key:'. $header->kid);
@@ -38,7 +38,7 @@ if (!isset($headers["Authorization"])) {
     $jwt = $Authorization_array[1];
 }
 
-//JWT‚Ì”FØ /tmp‚Ídyno‚ÌÄ‹N“®‚ÅÁ‚¦‚Ü‚·
+//JWTã®èªè¨¼ /tmpã¯dynoã®å†èµ·å‹•ã§æ¶ˆãˆã¾ã™
 $keys_file = "/tmp/securetoken.json"; // the file for the downloaded public keys
 $cache_file = "/tmp/pkeys.cache"; // this file contains the next time the system has to revalidate the keys
 $fbProjectId = "learn-firebase-masalib";   //  MUST REPLACE <YOUR FIREBASE PROJECTID> with your own!
@@ -47,20 +47,25 @@ if (isset($verified_array["error"])) {
     http_response_code( 401 ) ;
     exit();
 }
-if (!isset($verified_array["auth_time"])) {
-    http_response_code( 401 ) ;
-    exit();
-}
 
-//ƒf[ƒ^æ“¾•”•ª
+//if (isset($verified_array["auth_time"])) {
+//    http_response_code( 401 ) ;
+//    exit();
+//}
+
+//ãƒ‡ãƒ¼ã‚¿å–å¾—éƒ¨åˆ†
 $json = array(
     array('name'=>'Google', 'url'=>'https://www.google.co.jp/'),
     array('name'=>'Yahoo!', 'url'=>'http://www.yahoo.co.jp/'),
 );
+
+
+
  
 header("Content-Type: text/javascript; charset=utf-8");
 http_response_code(200) ;
-echo json_encode($json); // ”z—ñ‚ğJSONŒ`®‚É•ÏŠ·‚µ‚Ä‚­‚ê‚é
+//echo json_encode($json); // é…åˆ—ã‚’JSONå½¢å¼ã«å¤‰æ›ã—ã¦ãã‚Œã‚‹
+echo json_encode($verified_array); // é…åˆ—ã‚’JSONå½¢å¼ã«å¤‰æ›ã—ã¦ãã‚Œã‚‹
 
 
 /////// FROM THIS POINT, YOU CAN COPY/PASTE - NO CHANGES REQUIRED
