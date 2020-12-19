@@ -47,6 +47,8 @@ $json = json_encode( $array , JSON_PRETTY_PRINT ) ;
 // ヘッダーを指定
 header( "Content-Type: application/json; charset=utf-8" ) ;
 
+var_dump($json);
+
 // JSONを出力
 echo $json ;
 
