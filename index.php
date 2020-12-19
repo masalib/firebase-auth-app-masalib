@@ -18,7 +18,6 @@ if(isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
     $headers = $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'];
 }
 
-/* ここに$origin、$method、$headersをチェックする処理を入れる */
 header('Access-Control-Allow-Method: ' . $method);
 header('Access-Control-Allow-Headers: ' . $headers);
 
@@ -39,12 +38,16 @@ if (!isset($headers["Authorization"])) {
     $jwt = $Authorization_array[1];
 }
 
-//JWTの認証
-$keys_file = "securetoken.json"; // the file for the downloaded public keys
-$cache_file = "pkeys.cache"; // this file contains the next time the system has to revalidate the keys
+//JWTの認証 /tmpはdynoの再起動で消えます
+$keys_file = "/tmp/securetoken.json"; // the file for the downloaded public keys
+$cache_file = "/tmp/pkeys.cache"; // this file contains the next time the system has to revalidate the keys
 $fbProjectId = "learn-firebase-masalib";   //  MUST REPLACE <YOUR FIREBASE PROJECTID> with your own!
 $verified_array = verify_firebase_token($jwt);
 if (isset($verified_array["error"])) {
+    http_response_code( 401 ) ;
+    exit();
+}
+if (!isset($verified_array["auth_time"])) {
     http_response_code( 401 ) ;
     exit();
 }
