@@ -53,6 +53,7 @@ $json = array(
 );
  
 header("Content-Type: text/javascript; charset=utf-8");
+http_response_code(200) ;
 echo json_encode($json); // ”z—ñ‚ðJSONŒ`Ž®‚É•ÏŠ·‚µ‚Ä‚­‚ê‚é
 
 exit();
