@@ -42,7 +42,14 @@ $array = array(
 );
 
 // 連想配列($array)をJSONに変換(エンコード)する
-$json = json_encode( $array ) ;
+$json = json_encode( $array , JSON_PRETTY_PRINT ) ;
+
+// ヘッダーを指定
+header( "Content-Type: application/json; charset=utf-8" ) ;
+
+// JSONを出力
+echo $json ;
+
 exit();
 
 
